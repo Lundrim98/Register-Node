@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const { registerValidation, loginValidation } = require('../validation');
 
 router.post('/register', async (req, res) => {
-//Lets Validate the date before we make a user
+// Validate the date before we make a user
 const { error } = registerValidation(req.body);
 if (error) return res.status(400).send(error.details[0].message);
 

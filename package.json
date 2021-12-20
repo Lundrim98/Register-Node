@@ -1,13 +1,13 @@
 {
-  "name": "register",
+  "name": "Register",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node.js, Javascript Registration form",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Lundrim Alla",
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.1",

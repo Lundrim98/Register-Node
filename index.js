@@ -13,9 +13,9 @@ const mongoose = require('mongoose');
     console.log('connected to db!')
 );
 
-//MIDLLEWARE
+//MIDDLEWARE
     app.use(express.json());
-//ROUTE MIDLLEWARES
+//ROUTE MIDDLEWARES
     app.use('/api/user', authRoute);
     app.use('/api/posts', postRoute);
 

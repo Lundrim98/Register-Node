@@ -5,20 +5,20 @@ const bcrypt = require('bcryptjs');
 const { registerValidation, loginValidation } = require('../validation');
 
 router.post('/register', async (req, res) => {
-// Validate the date before we make a user
+//VALIDATE THE DATA BEFORE WE MAKE A USER
     const { error } = registerValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-//Checking if the user is registered
+//CHECKING IF USER IS REGISTERED
     const emailExist = await User.findOne({ email: req.body.email});
     if(emailExist) return res.status(400).send('Email already exists');
 
-//Hashing the  passwords
+//HASHING THE PASSWORDS
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
 
-//Create a new user
+//CREATE A NEW USER
     const user = new User({
         name: req.body.name,
         email: req.body.email,
@@ -31,22 +31,22 @@ router.post('/register', async (req, res) => {
         res.status(400).send(err);
     }
 });
-//Login
+//LOGIN
     router.post('/login', async (req,res) => {
     
-//Validate the date before we make a user
+//VALIDATE THE DATA BEFORE WE MAKE A USER
         const { error } = loginValidation(req.body);
         if (error) return res.status(400).send(error.details[0].message);
     
-//Checking if the email exists
+//CHECKING IF THE EMAIL EXISTS
         const user = await User.findOne({ email: req.body.email});
         if(!user) return res.status(400).send('Email is not found');
     
-//Password is correct
+//PASSWORD IS CORRECT
         const validPass = await bcrypt.compare(req.body.password, user.password);
         if(!validPass) return res.status(400).send('Invalid password');
-
-//Create a token
+en
+//CREATE A TOKEN
         const token = jwt.sign({ _id: user._id}, process.env.TOKEN_SECRET);
         res.header('auth-token', token).send(token);
 });

@@ -1,7 +1,7 @@
-//Validation
+//VALIDATION
 const Joi = require('@hapi/joi');
 
-//Register Validation
+//REGISTER VALIDATION
 const registerValidation = data => {
     const schema = Joi.object({ 
         name: Joi.string() 
